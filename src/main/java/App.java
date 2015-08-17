@@ -18,17 +18,62 @@ public class App {
 
     get("/results", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      // int side1 = Integer.parseInt(request.queryParams("side1"));
-      // int side2 = Integer.parseInt(request.queryParams("side2"));
-      // int side3 = Integer.parseInt(request.queryParams("side3"));
-      //
-      // Triangle myTriangle = new Triangle(side1, side2, side3);
-      // model.put("myTriangle", myTriangle);
+      int height = Integer.parseInt(request.queryParams("height"));
+      int width = Integer.parseInt(request.queryParams("width"));
+      int length = Integer.parseInt(request.queryParams("length"));
+      String zipcode = (request.queryParams("zipcode"));
+      int weight = Integer.parseInt(request.queryParams("weight"));
+
+      Parcels myParcel  = new Parcels(length, width, height);
+      Integer volume = length * width * height;
+      Integer weightPrice = calculateWeightPrice(weight);
+      Integer distancePrice = calculateDistancePrice(zipcode);
+      Integer volumePrice = calculateVolumePrice(volume);
+      Integer finalPrice = calculateFinalPrice(weightPrice, distancePrice, volumePrice);
+
+      model.put("finalPrice", finalPrice);
 
       model.put("template", "templates/results.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }
 
-  //Algorithm goes here
+  public static Integer calculateWeightPrice(Integer weight) {
+    Integer weightPrice = weight * 2;
+    return weightPrice;
+  }
+
+  public static Integer calculateDistancePrice(String zipCode) {
+    char[] zipCodeArray = zipCode.toCharArray();
+    Integer distancePrice;
+
+    // if zipcode is in Portland
+    if (zipCodeArray[0] == '9' && zipCodeArray[1] == '7' && zipCodeArray[2] == '2'){
+      distancePrice = 2;
+    // if zipcode is in Oregon
+  } else if (zipCodeArray[0] == '9' && zipCodeArray[1] == '7' && zipCodeArray[2] !='2') {
+      distancePrice = 5;
+    // if zipcode is outside of Oregon
+    } else {
+      distancePrice = 10;
+    }
+    return distancePrice;
+  }
+
+  public static Integer calculateVolumePrice(Integer volume){
+
+    Integer volumePrice;
+    if (volume <= 240) {
+      volumePrice = 2;
+    } else if (volume <= 500) {
+      volumePrice = 5;
+    } else {
+      volumePrice = 10;
+    }
+    return volumePrice;
+  }
+
+  public static Integer calculateFinalPrice(Integer weightPrice, Integer distancePrice, Integer volumePrice){
+    return weightPrice + distancePrice + volumePrice;
+  }
 }

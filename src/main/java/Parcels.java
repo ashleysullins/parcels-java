@@ -1,13 +1,12 @@
-public class Parcels {
+public class Parcels{
   private Integer mHeight;
   private Integer mLength;
   private Integer mWidth;
-  private Integer mWeight;
 
-  public Parcels(Integer height, Integer length, Integer width) {
-    mHeight = height;
+  public Parcels(Integer height, Integer length, Integer width){
     mLength = length;
     mWidth = width;
+    mHeight = height;
   }
 
   public int getHeight() {
