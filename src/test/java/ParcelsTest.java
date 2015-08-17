@@ -33,4 +33,12 @@ public class ParcelsTest {
     assertEquals(81900, testParcels.volume());
   }
 
+  @Test
+  public void newApp_setVolumePrice() {
+    Parcels testParcels = new Parcels(2,2,2);
+    Integer result = 2;
+    assertEquals(result, testParcels.calculateVolumePrice(8));
+  }
+
+
 }

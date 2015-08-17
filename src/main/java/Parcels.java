@@ -26,4 +26,17 @@ public class Parcels{
     return calculation;
   }
 
+  public Integer calculateVolumePrice(Integer volume){
+
+    Integer volumePrice;
+    if (volume <= 240) {
+      volumePrice = 2;
+    } else if (volume <= 500) {
+      volumePrice = 5;
+    } else {
+      volumePrice = 10;
+    }
+    return volumePrice;
+  }
+
 }

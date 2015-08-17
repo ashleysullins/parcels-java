@@ -25,10 +25,10 @@ public class App {
       int weight = Integer.parseInt(request.queryParams("weight"));
 
       Parcels myParcel  = new Parcels(length, width, height);
-      Integer volume = length * width * height;
+      Integer volume = myParcel.volume();
       Integer weightPrice = calculateWeightPrice(weight);
       Integer distancePrice = calculateDistancePrice(zipcode);
-      Integer volumePrice = calculateVolumePrice(volume);
+      Integer volumePrice = myParcel.calculateVolumePrice(volume);
       Integer finalPrice = calculateFinalPrice(weightPrice, distancePrice, volumePrice);
 
       model.put("finalPrice", finalPrice);
@@ -58,19 +58,6 @@ public class App {
       distancePrice = 10;
     }
     return distancePrice;
-  }
-
-  public static Integer calculateVolumePrice(Integer volume){
-
-    Integer volumePrice;
-    if (volume <= 240) {
-      volumePrice = 2;
-    } else if (volume <= 500) {
-      volumePrice = 5;
-    } else {
-      volumePrice = 10;
-    }
-    return volumePrice;
   }
 
   public static Integer calculateFinalPrice(Integer weightPrice, Integer distancePrice, Integer volumePrice){

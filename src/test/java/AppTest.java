@@ -18,13 +18,6 @@ public class AppTest {
   }
 
   @Test
-  public void newApp_setVolumePrice() {
-    App testApp = new App();
-    Integer result = 10;
-    assertEquals(result, testApp.calculateVolumePrice(24000));
-  }
-
-  @Test
   public void newApp_setFinalPrice() {
     App testApp = new App();
     Integer result = 32;

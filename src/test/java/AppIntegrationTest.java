@@ -15,50 +15,22 @@ public class AppIntegrationTest extends FluentTest {
   @ClassRule
   public static ServerRule server = new ServerRule();
 
-  // @Test
-  // public void rootTest() {
-  //     goTo("http://localhost:4567/");
-  //     assertThat(pageSource()).contains("Triangle");
-  // }
-  //
-  // @Test
-  // public void triangleTestIsAnEquilateralTriangle() {
-  //   goTo("http://localhost:4567/");
-  //   fill("#side1").with("5");
-  //   fill("#side2").with("5");
-  //   fill("#side3").with("5");
-  //   submit(".btn");
-  //   assertThat(pageSource()).contains("This is an Equilateral triangle!");
-  // }
-  //
-  // @Test
-  // public void triangleTestIsAnIsoscelesTriangle() {
-  //   goTo("http://localhost:4567/");
-  //   fill("#side1").with("5");
-  //   fill("#side2").with("5");
-  //   fill("#side3").with("7");
-  //   submit(".btn");
-  //   assertThat(pageSource()).contains("This is an Isosceles triangle!");
-  // }
-  //
-  // @Test
-  // public void triangleTestIsAScaleneTriangle() {
-  //   goTo("http://localhost:4567/");
-  //   fill("#side1").with("5");
-  //   fill("#side2").with("6");
-  //   fill("#side3").with("7");
-  //   submit(".btn");
-  //   assertThat(pageSource()).contains("This is a Scalene triangle!");
-  // }
-  //
-  // @Test
-  // public void triangleTestIsNotATriangle() {
-  //   goTo("http://localhost:4567/");
-  //   fill("#side1").with("2");
-  //   fill("#side2").with("2");
-  //   fill("#side3").with("7");
-  //   submit(".btn");
-  //   assertThat(pageSource()).contains("This is not even a triangle! Don't play.");
-  // }
+  @Test
+  public void rootTest() {
+      goTo("http://localhost:4567/");
+      assertThat(pageSource()).contains("Parcel Calculator");
+  }
+
+  @Test
+  public void calculateSmallPackagetoPortland() {
+    goTo("http://localhost:4567/");
+    fill("#height").with("2");
+    fill("#width").with("2");
+    fill("#length").with("2");
+    fill("#weight").with("3");
+    fill("#zipcode").with("972");
+    submit(".btn");
+    assertThat(pageSource()).contains("Your shipping cost would be 10 .");
+  }
 
 }
